@@ -15,7 +15,7 @@ public class DBConnect {
 		
 		Connection con = null;
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver"); 
+			Class.forName("com.mysql.jdbc.Driver"); 
 			
 			//Provide the correct details: DBServer/DBName, username, password 
 			

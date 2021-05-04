@@ -31,7 +31,7 @@ var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT";
 
  $.ajax( 
  { 
- url : "itemsApi", 
+ url : "FundApi", 
  type : type, 
  data : $("#formItem").serialize(), 
  dataType : decodeURIComponent("text"), 
@@ -56,7 +56,7 @@ $(document).on("click", ".btnRemove", function(event)
 { 
  $.ajax( 
  { 
- url : "itemsApi", 
+ url : "FundApi", 
  type : "DELETE", 
  data : "itemId=" + $(this).data("itemid"),
  dataType : "text", 
