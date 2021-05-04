@@ -3,6 +3,8 @@ package com;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import util.DBConnect;;
 public class Fund {
@@ -78,7 +80,7 @@ public class Fund {
 				} 
 					catch (Exception e) 
 					{ 
-						output = "Error while reading the items."; 
+						output = "Error while reading the Fund Details."; 
 						System.err.println(e.getMessage()); 
 					} 
 				return output; 
@@ -86,7 +88,7 @@ public class Fund {
 	
 	
 	
-	public String insertItem(String ProjectID,String Fund_announcement , String Fund_duration,String instructions , String Amount ) 
+	public String InsertFund(String ProjectID,String Fund_announcement , String Fund_duration,String instructions , String Amount ) 
 	 { 
 			 String output = ""; 
 			 
@@ -115,14 +117,13 @@ public class Fund {
 				 preparedStmt.execute(); 
 				 con.close(); 
 				 
-				 String newItems = ReafFundDetails(); 
-				 output = "{\"status\":\"success\", \"data\": \"" + 
-				 newItems + "\"}"; 
-				 
+				 String newFund = ReafFundDetails(); 
+				 output = "{\"status\":\"success\", \"data\": \"" + newFund + "\"}";  
+									 
 			 } 
 			 catch (Exception e) 
 			 { 
-				 output = "{\"status\":\"error\", \"data\": \"Error while inserting the item.\"}"; 
+				 output = "{\"status\":\"error\", \"data\": \"Error while inserting the fund details.\"}"; 
 				 System.err.println(e.getMessage()); 
 			 } 
 			 return output; 
@@ -131,7 +132,51 @@ public class Fund {
 
 
 
-
+	public String UpdateFund(String fundid , String Fund_announcement , String Fund_duration,String instructions , String Amount) 
+	 { 
+		String output = ""; 
+		 try
+		 { 
+			 Connection con = DBConnect.connect(); 
+			 if (con == null) 
+			 { 
+				 return "Error while connecting to the database for updating."; 
+			 } 
+			 // create a prepared statement
+				String query = "UPDATE fund SET Fund_Announcment = ? , F_Duration = ? , A_Instructions = ? ,D_modified_date = ? ,Fund_amount = ? Where FundID = ? ";
+			     
+			 	// create a prepared statement
+			 	PreparedStatement preparedStmt = con.prepareStatement(query); 
+			 	
+			 	//Getting the local date 
+			 	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+			 	java.util.Date date =  new Date();
+			 	String d1 = dateFormat.format(date);
+			 	
+			 	// binding values
+			 	preparedStmt.setString(1, Fund_announcement);
+			 	preparedStmt.setString(2, Fund_duration);
+			 	preparedStmt.setString(3,instructions);
+			 	preparedStmt.setString(4,d1);	
+			 	preparedStmt.setDouble(5,Double.parseDouble(Amount));	
+			 	preparedStmt.setInt(6,Integer.parseInt(fundid ));
+				// execute the statement
+				 preparedStmt.execute(); 
+				 con.close(); 
+				 
+				 String newFund = ReafFundDetails(); 
+				 output = "{\"status\":\"success\", \"data\": \"" + newFund + "\"}";  
+				
+				 
+		 	} 
+			 catch (Exception e) 
+			 { 
+				 output = "{\"status\":\"error\", \"data\": \"Error while updating the fund details.\"}"; 
+				 System.err.println(e.getMessage()); 
+			 } 
+			 return output; 
+} 
+	
 	
 	
 	
