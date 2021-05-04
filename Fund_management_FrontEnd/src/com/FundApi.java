@@ -57,10 +57,10 @@ public class FundApi extends HttpServlet {
 		// TODO Auto-generated method stub
 		 Map paras = getParasMap(request); 
 		 String output = Fundobj.UpdateFund(paras.get("hidItemIDSave").toString(), 
-		 paras.get("Announcement").toString(), 
-		 paras.get("Duration").toString(), 
-		paras.get("Instructions").toString(), 
-		paras.get("Amount").toString()); 
+											 paras.get("Announcement").toString(), 
+											 paras.get("Duration").toString(), 
+											 paras.get("Instructions").toString(), 
+											 paras.get("Amount").toString()); 
 		response.getWriter().write(output); 
 	}
 
