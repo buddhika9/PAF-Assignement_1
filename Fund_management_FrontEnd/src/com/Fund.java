@@ -9,7 +9,7 @@ import java.util.Date;
 import util.DBConnect;;
 public class Fund {
 	
-	public String ReafFundDetails()
+	public String ReadFundDetails()
 	{ 
 		 String output = ""; 
 		try
@@ -117,7 +117,7 @@ public class Fund {
 				 preparedStmt.execute(); 
 				 con.close(); 
 				 
-				 String newFund = ReafFundDetails(); 
+				 String newFund = ReadFundDetails(); 
 				 output = "{\"status\":\"success\", \"data\": \"" + newFund + "\"}";  
 									 
 			 } 
@@ -164,7 +164,7 @@ public class Fund {
 				 preparedStmt.execute(); 
 				 con.close(); 
 				 
-				 String newFund = ReafFundDetails(); 
+				 String newFund = ReadFundDetails(); 
 				 output = "{\"status\":\"success\", \"data\": \"" + newFund + "\"}";  
 				
 				 
@@ -175,9 +175,38 @@ public class Fund {
 				 System.err.println(e.getMessage()); 
 			 } 
 			 return output; 
-} 
+	 } 
 	
-	
+	public String DeleteFund(String FundID) 
+	 { 
+		 String output = ""; 
+		 try
+		 { 
+			 Connection con = DBConnect.connect(); 
+		 if (con == null) 
+		 { 
+			 return "Error while connecting  to the database for deleting."; 
+		 } 
+			 // create a prepared statement
+			 String query = "delete from fund where FundID=?"; 
+			 PreparedStatement preparedStmt = con.prepareStatement(query); 
+			 // binding values
+			 preparedStmt.setInt(1, Integer.parseInt(FundID)); 
+			 // execute the statement
+			 preparedStmt.execute(); 
+			 con.close(); 
+			 
+			 String newFund =ReadFundDetails (); 
+			 output = "{\"status\":\"success\", \"data\": \"" + newFund + "\"}";  
+					
+		 } 
+		 catch (Exception e) 
+		 { 
+			 output = "{\"status\":\"error\", \"data\": \"Error while deleting the item.\"}"; 
+			 System.err.println(e.getMessage()); 
+		 } 
+		 return output; 
+	 } 
 	
 	
 	
