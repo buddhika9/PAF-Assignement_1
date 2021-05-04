@@ -66,7 +66,7 @@ pageEncoding="ISO-8859-1"%>
 
 
 <script src="compo/jquery-3.2.1.min.js"></script>
-<script src="compo/items.js"></script>
+<script src="compo/fund.js"></script>
 
 <!-- required for number formatting only -->
 <script src="compo/numeral.min.js"></script>

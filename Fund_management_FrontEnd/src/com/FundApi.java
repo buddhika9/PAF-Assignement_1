@@ -80,22 +80,22 @@ public class FundApi extends HttpServlet {
 	 Map<String, String> map = new HashMap<String, String>(); 
 	try
 	 { 
-	 Scanner scanner = new Scanner(request.getInputStream(), "UTF-8"); 
-	 String queryString = scanner.hasNext() ? 
-	 scanner.useDelimiter("\\A").next() : ""; 
-	 scanner.close(); 
-	 String[] params = queryString.split("&"); 
-	 for (String param : params) 
-	 { 
-		 String[] p = param.split("=");
-		 map.put(p[0], p[1]); 
-		 } 
-		 } 
+		 Scanner scanner = new Scanner(request.getInputStream(), "UTF-8"); 
+		 String queryString = scanner.hasNext() ? 
+		 scanner.useDelimiter("\\A").next() : ""; 
+		 scanner.close(); 
+		 String[] params = queryString.split("&"); 
+			 for (String param : params) 
+			 { 
+				 String[] p = param.split("=");
+				 map.put(p[0], p[1]); 
+			 } 
+		} 
 		catch (Exception e) 
-		 { 
+		{ 
 		 } 
-		return map; 
-		}
+			return map; 
+	}
 	 
 
 }
