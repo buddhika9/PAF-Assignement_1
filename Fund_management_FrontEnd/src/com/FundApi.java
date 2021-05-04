@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/FundApi")
 public class FundApi extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	Fund Fundobj = new Fund();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,7 +36,14 @@ public class FundApi extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		 String output = Fundobj.InsertFund(request.getParameter("ProjectID"), 
+											request.getParameter("Announcement"), 
+											request.getParameter("Duration"), 
+											request.getParameter("Instructions"),
+											request.getParameter("Amount")); 
+				 
+				response.getWriter().write(output); 
 	}
 
 	/**
