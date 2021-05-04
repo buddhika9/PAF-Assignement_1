@@ -55,6 +55,13 @@ public class FundApi extends HttpServlet {
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		 Map paras = getParasMap(request); 
+		 String output = Fundobj.UpdateFund(paras.get("hidItemIDSave").toString(), 
+		 paras.get("Announcement").toString(), 
+		 paras.get("Duration").toString(), 
+		paras.get("Instructions").toString(), 
+		paras.get("Amount").toString()); 
+		response.getWriter().write(output); 
 	}
 
 	/**
