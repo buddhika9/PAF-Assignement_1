@@ -86,7 +86,52 @@ public class Fund {
 	
 	
 	
+	public String insertItem(String ProjectID,String Fund_announcement , String Fund_duration,String instructions , String Amount ) 
+	 { 
+			 String output = ""; 
+			 
+			 try
+			 { 
+				 Connection con = DBConnect.connect(); 
+				 
+				 if (con == null) 
+				 { 
+					 return "Error while connecting to the database for inserting."; 
+				 } 
+				 // create a prepared statement
+				 String query = "insert into fund (FundID ,ProjectID, F_Duration ,Fund_amount)"
+					  		+ " values(?,?,?,?)";
+				// create a prepared statement
+				PreparedStatement preparedStmt = con.prepareStatement(query); 
+											
+				
+				// binding values
+				preparedStmt.setInt(1, 0);
+				preparedStmt.setInt(2,Integer.parseInt((ProjectID)));			
+				preparedStmt.setString(3,(Fund_duration));			
+				preparedStmt.setDouble(4,Double.parseDouble(Amount));
 	
+				 // execute the statement
+				 preparedStmt.execute(); 
+				 con.close(); 
+				 
+				 String newItems = ReafFundDetails(); 
+				 output = "{\"status\":\"success\", \"data\": \"" + 
+				 newItems + "\"}"; 
+				 
+			 } 
+			 catch (Exception e) 
+			 { 
+				 output = "{\"status\":\"error\", \"data\": \"Error while inserting the item.\"}"; 
+				 System.err.println(e.getMessage()); 
+			 } 
+			 return output; 
+		} 
+
+
+
+
+
 	
 	
 	
