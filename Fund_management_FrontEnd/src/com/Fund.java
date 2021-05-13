@@ -21,7 +21,7 @@ public class Fund {
 			 } 
 		 // Prepare the html table to be displayed
 		//Prepare the html table to be displayed
-			output = "<table border='1'><tr>"
+			output = "<table border='1' style = 'table'><tr>"
 					  + "<th>Fund ID</th>"
 					  + "<th>Project ID</th>"
 					  + "<th>Fund Request Date</th>" 
